@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "phase": "124",
+    "model": "Qwen/Qwen3-8B",
+    "seed": 42
+  },
+  "results": {
+    "q_only": {
+      "target_modules": [
+        "q_proj"
+      ],
+      "base_gen": 0.055,
+      "post_gen": 0.67,
+      "base_rank_med": 53594.0,
+      "post_rank_med": 14.5,
+      "train_time_s": 595.8789422512054
+    },
+    "k_only": {
+      "target_modules": [
+        "k_proj"
+      ],
+      "base_gen": 0.055,
+      "post_gen": 0.495,
+      "base_rank_med": 53594.0,
+      "post_rank_med": 1.0,
+      "train_time_s": 572.0503280162811
+    },
+    "v_only": {
+      "target_modules": [
+        "v_proj"
+      ],
+      "base_gen": 0.055,
+      "post_gen": 0.68,
+      "base_rank_med": 53594.0,
+      "post_rank_med": 229.0,
+      "train_time_s": 584.4325025081635
+    },
+    "o_only": {
+      "target_modules": [
+        "o_proj"
+      ],
+      "base_gen": 0.055,
+      "post_gen": 0.87,
+      "base_rank_med": 53594.0,
+      "post_rank_med": 22.5,
+      "train_time_s": 591.9470512866974
+    },
+    "ffn_only": {
+      "target_modules": [
+        "gate_proj"
+      ],
+      "base_gen": 0.055,
+      "post_gen": 0.96,
+      "base_rank_med": 53594.0,
+      "post_rank_med": 3384.5,
+      "train_time_s": 610.3376779556274
+    },
+    "q_v": {
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "base_gen": 0.055,
+      "post_gen": 0.635,
+      "base_rank_med": 53594.0,
+      "post_rank_med": 9.0,
+      "train_time_s": 621.6064112186432
+    }
+  }
+}

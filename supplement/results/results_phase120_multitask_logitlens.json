@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "phase": "120",
+    "model": "Qwen/Qwen3-8B",
+    "seeds": [
+      42,
+      11
+    ],
+    "tasks": [
+      "entity_counting",
+      "character_counting",
+      "addition"
+    ],
+    "layer": 35
+  },
+  "tasks": {
+    "entity_counting": {
+      "42": {
+        "seed": 42,
+        "baseline_gen": 0.07,
+        "post_gen": 0.84,
+        "logitlens_pre": {
+          "accuracy": 0.09,
+          "median_rank": 54866.5,
+          "mean_rank": 51434.9,
+          "median_logit_ratio": 0.37003332549514134
+        },
+        "logitlens_post": {
+          "accuracy": 0.765,
+          "median_rank": 1674.0,
+          "mean_rank": 2468.725,
+          "median_logit_ratio": 42.70469749926558
+        },
+        "delta": {
+          "accuracy": 0.675,
+          "median_rank": -53192.5,
+          "logit_ratio_mult": 115.407703584658
+        },
+        "train_time_s": 612.8689179420471,
+        "final_loss": 0.23601531982421875
+      },
+      "11": {
+        "seed": 11,
+        "baseline_gen": 0.075,
+        "post_gen": 0.89,
+        "logitlens_pre": {
+          "accuracy": 0.125,
+          "median_rank": 53798.5,
+          "mean_rank": 50274.825,
+          "median_logit_ratio": 0.3580904516438978
+        },
+        "logitlens_post": {
+          "accuracy": 0.825,
+          "median_rank": 1.0,
+          "mean_rank": 44.82,
+          "median_logit_ratio": 27496.661118667318
+        },
+        "delta": {
+          "accuracy": 0.7,
+          "median_rank": -53797.5,
+          "logit_ratio_mult": 76786.91298404733
+        },
+        "train_time_s": 607.7464001178741,
+        "final_loss": 0.6226531982421875
+      }
+    },
+    "character_counting": {
+      "42": {
+        "seed": 42,
+        "baseline_gen": 0.005,
+        "post_gen": 0.52,
+        "logitlens_pre": {
+          "accuracy": 0.085,
+          "median_rank": 31246.5,
+          "mean_rank": 36176.42,
+          "median_logit_ratio": 0.4247521871785227
+        },
+        "logitlens_post": {
+          "accuracy": 0.41,
+          "median_rank": 27.5,
+          "mean_rank": 272.505,
+          "median_logit_ratio": 0.7696283338591666
+        },
+        "delta": {
+          "accuracy": 0.32499999999999996,
+          "median_rank": -31219.0,
+          "logit_ratio_mult": 1.811946680844815
+        },
+        "train_time_s": 410.5269386768341,
+        "final_loss": 1.13046875
+      },
+      "11": {
+        "seed": 11,
+        "baseline_gen": 0.015,
+        "post_gen": 0.505,
+        "logitlens_pre": {
+          "accuracy": 0.07,
+          "median_rank": 33283.0,
+          "mean_rank": 34575.215,
+          "median_logit_ratio": 0.4275228292785065
+        },
+        "logitlens_post": {
+          "accuracy": 0.52,
+          "median_rank": 5.0,
+          "mean_rank": 15.795,
+          "median_logit_ratio": 1.108540780312089
+        },
+        "delta": {
+          "accuracy": 0.45,
+          "median_rank": -33278.0,
+          "logit_ratio_mult": 2.592939320348073
+        },
+        "train_time_s": 407.4559533596039,
+        "final_loss": 1.3830078125
+      }
+    },
+    "addition": {
+      "42": {
+        "seed": 42,
+        "baseline_gen": 0.8,
+        "post_gen": 1.0,
+        "logitlens_pre": {
+          "accuracy": 0.945,
+          "median_rank": 21186.0,
+          "mean_rank": 20175.405,
+          "median_logit_ratio": 3.1322579692281143
+        },
+        "logitlens_post": {
+          "accuracy": 1.0,
+          "median_rank": 1.0,
+          "mean_rank": 1.0,
+          "median_logit_ratio": 6386011851.868868
+        },
+        "delta": {
+          "accuracy": 0.05500000000000005,
+          "median_rank": -21185.0,
+          "logit_ratio_mult": 2038788597.305315
+        },
+        "train_time_s": 257.71183228492737,
+        "final_loss": 0.0
+      },
+      "11": {
+        "seed": 11,
+        "baseline_gen": 0.815,
+        "post_gen": 1.0,
+        "logitlens_pre": {
+          "accuracy": 0.955,
+          "median_rank": 21186.0,
+          "mean_rank": 20566.04,
+          "median_logit_ratio": 2.931560310764196
+        },
+        "logitlens_post": {
+          "accuracy": 1.0,
+          "median_rank": 1.0,
+          "mean_rank": 1.0,
+          "median_logit_ratio": 5630261511.538728
+        },
+        "delta": {
+          "accuracy": 0.04500000000000004,
+          "median_rank": -21185.0,
+          "logit_ratio_mult": 1920568194.2342014
+        },
+        "train_time_s": 260.79033279418945,
+        "final_loss": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "direct": 0.075,
+  "zeroshot_cot": 0.125,
+  "fewshot_cot": 0.21
+}

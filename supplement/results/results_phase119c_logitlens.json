@@ -1,0 +1,102 @@
+{
+  "metadata": {
+    "phase": "119c",
+    "model": "Qwen/Qwen3-8B",
+    "seeds": [
+      42,
+      11,
+      77
+    ],
+    "layer": 35,
+    "n_train": 400,
+    "n_test": 200,
+    "lora_rank": 16,
+    "lora_alpha": 32.0
+  },
+  "seeds": {
+    "42": {
+      "seed": 42,
+      "logitlens_pre": {
+        "accuracy": 0.12,
+        "median_rank": 53561.5,
+        "mean_rank": 49821.52,
+        "rank_le_10_frac": 0.0,
+        "median_logit_ratio": 0.3593247960733007,
+        "mean_correct_logit": 17.685766792297365,
+        "mean_max_wrong_logit": 18.881466488838196
+      },
+      "logitlens_post": {
+        "accuracy": 0.475,
+        "median_rank": 2.0,
+        "mean_rank": 238.39,
+        "rank_le_10_frac": 0.795,
+        "median_logit_ratio": 0.9595727284960782,
+        "mean_correct_logit": 36.30653944969177,
+        "mean_max_wrong_logit": 36.81168536186218
+      },
+      "delta": {
+        "accuracy": 0.355,
+        "median_rank": -53559.5,
+        "median_logit_ratio": 2.67048840569145
+      },
+      "train_time_s": 617.6814007759094,
+      "final_loss": 0.96201171875
+    },
+    "11": {
+      "seed": 11,
+      "logitlens_pre": {
+        "accuracy": 0.085,
+        "median_rank": 56829.5,
+        "mean_rank": 53362.385,
+        "rank_le_10_frac": 0.0,
+        "median_logit_ratio": 0.2914233832783016,
+        "mean_correct_logit": 16.92954444408417,
+        "mean_max_wrong_logit": 18.34752250671387
+      },
+      "logitlens_post": {
+        "accuracy": 0.9,
+        "median_rank": 1.0,
+        "mean_rank": 1.24,
+        "rank_le_10_frac": 1.0,
+        "median_logit_ratio": 197713.49181531125,
+        "mean_correct_logit": 44.39749387741089,
+        "mean_max_wrong_logit": 34.1526064491272
+      },
+      "delta": {
+        "accuracy": 0.8150000000000001,
+        "median_rank": -56828.5,
+        "median_logit_ratio": 678440.7030306594
+      },
+      "train_time_s": 599.5792784690857,
+      "final_loss": 0.554632568359375
+    },
+    "77": {
+      "seed": 77,
+      "logitlens_pre": {
+        "accuracy": 0.075,
+        "median_rank": 57549.0,
+        "mean_rank": 54136.185,
+        "rank_le_10_frac": 0.0,
+        "median_logit_ratio": 0.30965725951821366,
+        "mean_correct_logit": 17.091157417297364,
+        "mean_max_wrong_logit": 18.424979610443117
+      },
+      "logitlens_post": {
+        "accuracy": 0.78,
+        "median_rank": 1.0,
+        "mean_rank": 4.47,
+        "rank_le_10_frac": 0.93,
+        "median_logit_ratio": 68517.79416286357,
+        "mean_correct_logit": 41.06051739692688,
+        "mean_max_wrong_logit": 33.52300834655762
+      },
+      "delta": {
+        "accuracy": 0.7050000000000001,
+        "median_rank": -57548.0,
+        "median_logit_ratio": 221269.77438465544
+      },
+      "train_time_s": 616.1995565891266,
+      "final_loss": 0.7406204223632813
+    }
+  }
+}

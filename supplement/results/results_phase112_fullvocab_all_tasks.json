@@ -1,0 +1,142 @@
+{
+  "char_count": {
+    "task": "char_count",
+    "seeds": {
+      "11": {
+        "probe_layer": 36,
+        "probe_r2": 0.9820231870600945,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.525,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.58,
+        "repair_constrained": 0.58
+      },
+      "77": {
+        "probe_layer": 36,
+        "probe_r2": 0.9904706348572202,
+        "probe_round_acc": 0.97,
+        "baseline_constrained": 0.43,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.575,
+        "repair_constrained": 0.575
+      },
+      "42": {
+        "probe_layer": 10,
+        "probe_r2": 0.9732355642548384,
+        "probe_round_acc": 0.975,
+        "baseline_constrained": 0.555,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.575,
+        "repair_constrained": 0.575
+      }
+    },
+    "mean_baseline_constrained": 0.5033333333333334,
+    "mean_probe_round": 0.9816666666666666,
+    "mean_repair_fullvocab": 0.5766666666666665
+  },
+  "addition": {
+    "task": "addition",
+    "seeds": {
+      "11": {
+        "probe_layer": 35,
+        "probe_r2": 0.9999999999999892,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.905,
+        "baseline_fullvocab": 0.855,
+        "repair_fullvocab": 0.55,
+        "repair_constrained": 0.55
+      },
+      "77": {
+        "probe_layer": 35,
+        "probe_r2": 0.9999999999999881,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.905,
+        "baseline_fullvocab": 0.875,
+        "repair_fullvocab": 0.57,
+        "repair_constrained": 0.57
+      },
+      "42": {
+        "probe_layer": 34,
+        "probe_r2": 0.9999999999999923,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.96,
+        "baseline_fullvocab": 0.93,
+        "repair_fullvocab": 0.56,
+        "repair_constrained": 0.56
+      }
+    },
+    "mean_baseline_constrained": 0.9233333333333333,
+    "mean_probe_round": 1.0,
+    "mean_repair_fullvocab": 0.56
+  },
+  "list_length": {
+    "task": "list_length",
+    "seeds": {
+      "11": {
+        "probe_layer": 2,
+        "probe_r2": 0.9987487377848235,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.6,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.925,
+        "repair_constrained": 0.925
+      },
+      "77": {
+        "probe_layer": 2,
+        "probe_r2": 0.9985708978680987,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.54,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.925,
+        "repair_constrained": 0.925
+      },
+      "42": {
+        "probe_layer": 16,
+        "probe_r2": 0.9989506941338493,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.595,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.93,
+        "repair_constrained": 0.93
+      }
+    },
+    "mean_baseline_constrained": 0.5783333333333334,
+    "mean_probe_round": 1.0,
+    "mean_repair_fullvocab": 0.9266666666666667
+  },
+  "entity_counting": {
+    "task": "entity_counting",
+    "seeds": {
+      "11": {
+        "probe_layer": 2,
+        "probe_r2": 0.9982680583047968,
+        "probe_round_acc": 0.995,
+        "baseline_constrained": 0.32,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.445,
+        "repair_constrained": 0.445
+      },
+      "77": {
+        "probe_layer": 3,
+        "probe_r2": 0.9969857250163834,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.295,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.39,
+        "repair_constrained": 0.39
+      },
+      "42": {
+        "probe_layer": 1,
+        "probe_r2": 0.9977270623063614,
+        "probe_round_acc": 1.0,
+        "baseline_constrained": 0.34,
+        "baseline_fullvocab": 0.0,
+        "repair_fullvocab": 0.445,
+        "repair_constrained": 0.445
+      }
+    },
+    "mean_baseline_constrained": 0.31833333333333336,
+    "mean_probe_round": 0.9983333333333334,
+    "mean_repair_fullvocab": 0.4266666666666667
+  }
+}

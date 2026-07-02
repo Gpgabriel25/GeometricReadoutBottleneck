@@ -1,0 +1,33 @@
+{
+  "task": "entity_counting",
+  "seeds": {
+    "42": {
+      "baseline_constrained": 0.33,
+      "baseline_fullvocab": 0.0,
+      "repair_fullvocab": 0.59,
+      "repair_constrained": 0.59,
+      "per_count_repair": {
+        "1": 0.7142857142857143,
+        "2": 0.9047619047619048,
+        "3": 0.6,
+        "4": 0.75,
+        "5": 0.5555555555555556,
+        "6": 0.41379310344827586,
+        "7": 0.4583333333333333,
+        "8": 0.46153846153846156,
+        "9": 0.5789473684210527
+      }
+    }
+  },
+  "mean_baseline_constrained": 0.33,
+  "mean_repair_fullvocab": 0.59,
+  "hyperparams": {
+    "n_iters": 600,
+    "lr": 0.01,
+    "l2_reg": 0.001,
+    "hard_count_weight": 3.0,
+    "n_train": 300,
+    "n_test": 200
+  },
+  "elapsed_s": 41.16427421569824
+}

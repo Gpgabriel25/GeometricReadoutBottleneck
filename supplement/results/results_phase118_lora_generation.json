@@ -1,0 +1,67 @@
+{
+  "seeds": {
+    "42": {
+      "seed": 42,
+      "baseline_fullvocab": 0.055,
+      "baseline_constrained": 0.055,
+      "baseline_generation": 0.055,
+      "trained_fullvocab": 0.715,
+      "trained_constrained": 0.715,
+      "trained_generation": 0.715,
+      "training_time_s": 556.5680425167084
+    },
+    "11": {
+      "seed": 11,
+      "baseline_fullvocab": 0.085,
+      "baseline_constrained": 0.085,
+      "baseline_generation": 0.085,
+      "trained_fullvocab": 0.89,
+      "trained_constrained": 0.89,
+      "trained_generation": 0.89,
+      "training_time_s": 539.6594421863556
+    },
+    "77": {
+      "seed": 77,
+      "baseline_fullvocab": 0.075,
+      "baseline_constrained": 0.075,
+      "baseline_generation": 0.075,
+      "trained_fullvocab": 0.865,
+      "trained_constrained": 0.865,
+      "trained_generation": 0.865,
+      "training_time_s": 554.3066735267639
+    }
+  },
+  "metadata": {
+    "model": "Qwen/Qwen3-8B",
+    "lora_rank": 16,
+    "lora_alpha": 32.0,
+    "n_train": 400,
+    "n_test": 200,
+    "n_steps": 200,
+    "lr": 0.0002,
+    "batch_size": 4,
+    "protocol": "fullvocab_train_three_eval_modes",
+    "task": "entity_counting",
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "summary": {
+    "mean_generation": 0.8233333333333333,
+    "std_generation": 0.07728015412913089,
+    "mean_fullvocab": 0.8233333333333333,
+    "std_fullvocab": 0.07728015412913089,
+    "mean_baseline_generation": 0.07166666666666667,
+    "per_seed_generation": {
+      "42": 0.715,
+      "11": 0.89,
+      "77": 0.865
+    },
+    "per_seed_fullvocab": {
+      "42": 0.715,
+      "11": 0.89,
+      "77": 0.865
+    }
+  }
+}

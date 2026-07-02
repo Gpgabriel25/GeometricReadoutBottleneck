@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "phase": 125,
+    "model": "Qwen/Qwen3-8B"
+  },
+  "results": {
+    "M7_cot": {
+      "42": {
+        "entity_direct": 0.11,
+        "entity_cot_zs": 0.125,
+        "entity_cot_fs": 0.21,
+        "char_cot_fs": 0.12
+      },
+      "11": {
+        "entity_direct": 0.125,
+        "entity_cot_zs": 0.125,
+        "entity_cot_fs": 0.215
+      },
+      "77": {
+        "entity_direct": 0.175,
+        "entity_cot_zs": 0.17,
+        "entity_cot_fs": 0.18
+      }
+    },
+    "M4_diversity": {
+      "1": 0.11,
+      "4": 0.11,
+      "8": 0.11
+    }
+  }
+}
