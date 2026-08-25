@@ -44,7 +44,7 @@ from pathlib import Path
 
 import numpy as np
 
-os.environ.setdefault("HF_HOME", "/home/gpgabriel25/hf_cache")
+os.environ.setdefault("HF_HOME", os.environ.get("HF_CACHE", "./hf_cache"))
 os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
 
 import torch

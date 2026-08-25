@@ -39,7 +39,7 @@ from torch.optim import AdamW
 # Environment
 # ─────────────────────────────────────────────────────────────────────────────
 
-HF_CACHE = os.environ.get("HF_CACHE", "/home/gpgabriel25/hf_cache")
+HF_CACHE = os.environ.get("HF_CACHE", os.environ.get("HF_CACHE", "./hf_cache"))
 MODEL_NAME = "Qwen/Qwen3-8B"
 OUTPUT_PATH = "/tmp/results_phase117_lora_fullvocab.json"
 SEEDS = [42, 11, 77]

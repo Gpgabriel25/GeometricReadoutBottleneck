@@ -74,7 +74,7 @@ IMPORTANT, please:
     \item {\bf Experimental result reproducibility}
     \item[] Question: Does the paper fully disclose all the information needed to reproduce the main experimental results of the paper to the extent that it affects the main claims and/or conclusions of the paper (regardless of whether the code and data are provided or not)?
     \item[] Answer: \answerYes{} % Full code, data generation scripts, and results are included.
-    \item[] Justification: All experiment scripts (16 Python files, all PyTorch), synthetic benchmark generation code, and result JSON files are included in the supplementary materials and on GitHub. The benchmark is generated deterministically from seed values. Model weights are publicly available from HuggingFace (Qwen3-8B: Apache 2.0, Mistral-7B: Apache 2.0, Pythia-410M: MIT).
+    \item[] Justification: All experiment scripts (16 Python files, all PyTorch), synthetic benchmark generation code, and result JSON files are included in the anonymous supplementary materials. The benchmark is generated deterministically from seed values. Model weights are publicly available from HuggingFace (Qwen3-8B: Apache 2.0, Mistral-7B: Apache 2.0, Pythia-410M: MIT).
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -94,7 +94,7 @@ IMPORTANT, please:
 \item {\bf Open access to data and code}
     \item[] Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material?
     \item[] Answer: \answerYes{} % Code, settings checkpoints, and result files are publicly available.
-    \item[] Justification: Complete reproduction package at \url{https://github.com/Gpgabriel25/SnapshotIsolationCounting/tree/main/supplement} including 16 Python experiment scripts, 14 primary result JSON files, all paper figures, and a README with reproduction instructions. All scripts are verified to run on the same hardware (TPU VM, PyTorch) used for the paper.
+    \item[] Justification: Complete reproduction package included as anonymized supplementary materials: 16 Python experiment scripts, 14 primary result JSON files, all paper figures, and a README with reproduction instructions. All scripts are verified to run on the same hardware (TPU VM, PyTorch) used for the paper.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that paper does not include experiments requiring code.
@@ -205,7 +205,7 @@ IMPORTANT, please:
 \item {\bf New assets}
     \item[] Question: Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?
     \item[] Answer: \answerYes{} % New assets (code, results, figures) are released with documentation.
-    \item[] Justification: The supplementary materials package (\url{https://github.com/Gpgabriel25/SnapshotIsolationCounting/tree/main/supplement}) includes 16 Python experiment scripts, 14 result JSON files, and 20 figures (PDF + PNG), released under MIT license with a README containing reproduction instructions, expected results table, and protocol legend. The synthetic benchmark is generated deterministically from seed values by the included scripts.
+    \item[] Justification: The anonymized supplementary materials package includes 16 Python experiment scripts, 14 result JSON files, and 20 figures (PDF + PNG), released under MIT license with a README containing reproduction instructions, expected results table, and protocol legend. The synthetic benchmark is generated deterministically from seed values by the included scripts.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not release new assets.

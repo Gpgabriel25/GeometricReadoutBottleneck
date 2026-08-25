@@ -21,7 +21,7 @@
 \usepackage{multirow}
 \graphicspath{{figures/}}
 
-\title{The Right Answer, the Wrong Direction: Why Transformers Fail at Counting and How to Fix It}
+\title{Why Transformers Fail at Counting and How to Fix It}
 
 \author{
   Anonymous Author(s) \\
@@ -54,7 +54,7 @@ fix autoregressive generation. By contrast, a LoRA intervention on attention
 Q/V weights (7.67M parameters) improves upstream routing and achieves
 83.1\%\,$\pm$\,7.2\% in true greedy autoregressive generation. Logit-lens
 measurements confirm the mechanism: the correct digit's vocabulary rank drops
-from 55,980 to 1 ($50{,}000\times$ improvement). The bottleneck generalizes
+from 55,980 to 1. The bottleneck generalizes
 across character counting, addition, and list length, while remaining absent
 from broader multi-step reasoning benchmarks (MMLU, GSM8K).
 
@@ -69,20 +69,30 @@ output pathway is geometrically misaligned with the tokens needed to express it.
 % =============================================================================
 
 \paragraph{Core claims.}
-This paper makes three nested claims:
+A transformer that fails to count could be failing at either of two stages: it
+may never form an internal representation of the count, or it may form one and
+be unable to convert it into the right output token. Distinguishing these
+hypotheses requires measuring the internal representation directly (linear
+probes), measuring how the output head reads it out (cosine alignment and
+logit lens), and intervening on each stage in turn (targeted repairs). Under
+this microscope, three nested claims emerge:
+
 \begin{enumerate}
-\item \textbf{Geometric} (protocol-independent): Count-encoding directions are
-  orthogonal to \texttt{lm\_head} digit rows ($|\cos| \leq 0.032$,
+\item \textbf{Counts are linearly encoded but geometrically misaligned with
+  digit rows.} Count-encoding directions are orthogonal to
+  \texttt{lm\_head} digit rows ($|\cos| \leq 0.032$,
   indistinguishable from random). This is a structural property of the trained model.
-\item \textbf{Causal-diagnostic} (constrained next-token): The 9-row repair
+\item \textbf{Repairing only the digit rows fixes constrained decoding, not
+    generation.} The 9-row repair
   causally localizes the readout misalignment to digit rows \emph{for
   constrained digit decoding} (60.7--100.0\%). Under unconstrained autoregressive
   generation, the same repair achieves $0.0\%$, confirming the deployment
   bottleneck includes upstream routing beyond the output head.
-\item \textbf{Deployable} (autoregressive generation): LoRA Q/V rank-16 corrects
+\item \textbf{Correcting upstream routing restores generation.} LoRA Q/V rank-16 corrects
   upstream attention routing, achieving 83.1\%$\pm$7.2\% generation accuracy
   (5 seeds, multi-task; entity-only per-task: 97.0\%, 96.5\%, 94.5\%).
 \end{enumerate}
+Figure~\ref{fig:pipeline} summarizes the diagnosis and the three interventions.
 
 \begin{figure}[t]
 \centering
@@ -99,10 +109,11 @@ This paper makes three nested claims:
 Large language models can perform multi-step reasoning, pass professional
 exams, and write functional code, but they count poorly. For controlled prompts,
 the best models achieve $\leq$24\% accuracy without intervention, despite the
-task requiring no external knowledge. Prior work has documented these
+task requiring no external knowledge and every item to be counted being
+explicitly present in the prompt. Prior work has documented these
 failures~\citep{razeghi2022impact,stolfo2023mechanistic} without providing a
-principled explanation of \emph{why} counting breaks down when the answer is
-directly available in the input.
+principled explanation of \emph{why} counting breaks down even in this
+transparent setting.
 
 We propose a geometric answer: the failure is a \emph{readout bottleneck} at the
 output head. The model encodes counts accurately but the count-encoding
@@ -113,13 +124,19 @@ both. Both hold, verified via logit-lens (rank $55{,}980{\to}1$).
 
 \paragraph{Scope and contributions.}
 Our evidence is strongest for low-vocabulary aggregation tasks. Under one shared
-protocol on Qwen3-8B, probe-round reaches 96.8--100.0\% and 9-row repair
+protocol on Qwen3-8B, \emph{probe-round} --- using the linear probe itself as a
+decoder, which upper-bounds what any output-side intervention can reach ---
+reaches 96.8--100.0\%, and 9-row repair
 60.7--100.0\% across entity counting, character counting, addition, and list
 length. The bottleneck persists in instruct mode (first-token accuracy 22\%
 despite $R^2 \geq 0.9996$; 9-row repair: 99.9\%) and generalizes to
-natural-language counting (probe-round 96.3\%). MMLU and GSM8K confirm scope
-specificity: the bottleneck fires when the model pre-encodes the answer
-directly, not for multi-step reasoning. At 14B scale the misalignment
+natural-language counting (probe-round 96.3\%). MMLU and GSM8K serve as
+negative controls: on these multi-step benchmarks the answer-relevant
+representations are not misaligned with the output head ($|\cos| =
+0.31$--$0.48$ vs.\ $\leq 0.032$ for counting), so no readout bottleneck is
+expected or observed --- the effect is specific to tasks where the model
+pre-encodes an aggregate that must be emitted as one of a small set of tokens.
+At 14B scale the misalignment
 \emph{sharpens} ($|\cos|{=}0.011$, $0.57\times$ random baseline) yet targeted
 repair recovers 90.3\%\---scale strengthens, not refutes, the readout-bottleneck
 thesis.
@@ -145,15 +162,21 @@ between internal representations and the output head.
 Linear probes~\citep{alain2016understanding,hewitt2019designing} and the
 logit-lens~\citep{nostalgebraist2020logitlens,belrose2023eliciting} have shown
 that models encode information they cannot express. The linear representation
-hypothesis~\citep{park2023linear} and related work on latent
-knowledge~\citep{burns2023discovering} formalize this gap. Complementing
+hypothesis~\citep{park2023linear} formalizes \emph{when} concepts correspond to
+linear directions and how such directions support probing and steering; our
+contribution is complementary: we study what happens \emph{after} a concept is
+linearly encoded, and show that the readout pathway can fail to be aligned with
+the encoding even when the encoding itself is essentially perfect.
+Complementing
 these,~\citet{geva2021transformer} show FFN layers promote concepts into
 vocabulary space via the output embedding; our finding that count directions
 are orthogonal to \texttt{lm\_head} digit rows is the complementary
 observation that \emph{not all} linearly decodable features are so promoted.
 
 \paragraph{Activation steering.}
-DPS differs from activation
+Our Diagnostic Probe Steering (DPS) intervention reads the count from the
+probe-identified direction at an early layer and writes it directly to the
+output logits. DPS differs from activation
 addition~\citep{turner2023activation,zou2023representation} in operating on
 \emph{output logits} rather than residual-stream activations, and in targeting a
 specific geometric bottleneck rather than a generic behavioral direction. Our
@@ -167,24 +190,50 @@ MLP weights.
 % =============================================================================
 
 \paragraph{Synthetic benchmark.}
-$6 \text{ counts} \times 3 \text{ distractors} \times 4 \text{ lengths} \times
-3 \text{ spacings} = 216 \text{ conditions} \times 20 \text{ samples} = 4{,}320
-\text{ prompts}$. Counts: $\{1, 2, 3, 5, 8, 12\}$; split 70/30 stratified.
-For DPS evaluation we use single-digit counts $\{1, \ldots, 9\}$ (800 train,
-300 test). A natural-language extension tests 8 entity categories across 8
-diverse templates; 5 entity types are seen during probe training, 3 held out.
+Entity-counting prompts are passages of natural-language sentences such as
+``\emph{There are 2 apples near the pond.\ There are 3 dogs in the area.\ \ldots\
+Count how many apples there are.\ Answer with just the number.}'' The answer is
+the number of mentions of the target entity; distractor sentences mention other
+entities and must be ignored. Prompts are sampled from a factorial design whose
+factors are varied \emph{independently} of the true count so that neither the
+model nor a probe can exploit distributional shortcuts: counts
+$C$ (how many times the target is mentioned), distractors $D \in \{0,3,6\}$
+(how many irrelevant-entity sentences appear), passage lengths
+$L \in \{5,10,15,20\}$ sentences, and mention spacings (whether target mentions
+are clustered in one half of the passage, spread uniformly, or placed at random
+positions). A probe that read passage length or delimiter statistics rather than
+the count would fail under this randomization.
+The headline single-token experiments (probes, repairs, DPS, logit lens) sample
+counts uniformly from $\{1,\ldots,9\}$ (800 train, 300 test; e.g., the
+per-count breakdown in Table~\ref{tab:entity_count_stratified}); a factorial
+stress benchmark additionally includes count~$12$ to test multi-digit
+generalization (\S\ref{sec:multidigit}). A natural-language extension tests 8
+entity categories across 8 diverse templates; 5 entity types are seen during
+probe training, 3 held out.
+
+\paragraph{Tasks.}
+Beyond entity counting, three further low-vocabulary aggregation tasks share
+the same protocol: \emph{character counting} (``How many times does the letter
+`r' appear in `strawberry'?'' --- aggregate over token positions), \emph{addition}
+(sum two numbers presented in-context; the model must aggregate operands into a
+single digit-restricted result), and \emph{list length} (number of items in an
+enumerated list). Each requires pre-encoding an aggregate and emitting it as one
+token from a small set.
 
 \paragraph{Models.}
 Qwen3-8B (36 layers, 4096 hidden, GQA), Mistral-7B-v0.1 (32 layers, 4096
 hidden, GQA), and Pythia-410M (24 layers, 1024 hidden, MHA). Additional
 results on Qwen3-14B (40 layers, 5120 hidden).
 
-\paragraph{Evaluation modes.}
+\paragraph{Evaluation modes and metrics.}
 We report three modes: \emph{next-token} (argmax without generation),
-\emph{generation} (greedy decoding, first integer extracted), and
-\emph{instruct} (chat template wrapping). Each result is labeled with its mode.
-Headline comparisons use a shared protocol; cross-mode comparisons are noted
-explicitly. All tables specify evaluation protocol.
+\emph{generation} (greedy decoding; the emitted sequence is scored by its
+\emph{final} integer, i.e., the model's actual answer after any reasoning
+tokens), and \emph{instruct} (chat template wrapping). Each result is labeled
+with its mode. Comparisons that support headline claims always share prompts,
+tokenizer, seeds, and scoring; cross-mode comparisons are noted
+explicitly, and Table~\ref{tab:protocol_map} in the appendix maps every metric
+to its protocol.
 
 % =============================================================================
 \section{Results: The Representation--Output Gap}
@@ -198,13 +247,15 @@ reported value; means $\pm$ between-seed standard deviation.
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{Unified evaluation.} All methods under three standard
-  protocols on Qwen3-8B entity counting.}
+\caption{\textbf{Unified evaluation:} all methods under three standard protocols
+  on Qwen3-8B entity counting. Columns share prompts, seeds, and scoring;
+  ``next-token'' scores the argmax at the answer position (digit-restricted or
+  full-vocabulary), ``generation'' scores full greedy decoding by the final
+  emitted integer.}
 \label{tab:unified_evaluation}
 \begin{tabular}{lccc}
 \toprule
-\textbf{Method} & \textbf{Digit-restricted} & \textbf{Full-vocab} & \textbf{Generation} \\
- & \textbf{next-token} & \textbf{next-token} & \textbf{(greedy)} \\
+\textbf{Method} & \textbf{Digit-restr.\ next-token} & \textbf{Full-vocab next-token} & \textbf{Greedy generation} \\
 \midrule
 Baseline & 13.7\% & 0.0\% & 7.2\% \\
 Probe-round (oracle UB) &  98.7\% & --- & 96.0\% \\
@@ -230,7 +281,9 @@ Figure~\ref{fig:probe_gap} visualizes the representation--output gap.
 
 \begin{table}[t]
 \centering
-\caption{Per-layer probe $R^2$ on Qwen3-8B (ridge regression, entity-mean).}
+\caption{Per-layer probe $R^2$ on Qwen3-8B (ridge regression at the entity-mean
+  position). ``All'' = full test set; ``easy'' = the easy difficulty stratum
+  (count $\leq 3$, no distractors, passage length $\leq 10$ sentences).}
 \label{tab:probe_r2}
 \begin{tabular}{lcc}
 \toprule
@@ -251,7 +304,9 @@ Layer & $R^2$ (all) & $R^2$ (easy) \\
 \includegraphics[width=0.85\linewidth]{fig3_probe_r2_gap.pdf}
 \caption{Representation--output gap: per-layer probe $R^2$ (blue) remains above
   0.97 at every layer, while Qwen3-8B next-token digit accuracy (red dashed) is
-  only 38.8\%. The shaded region is between what the model \emph{knows} and
+  only 38.8\% under the stratified sampling used for this figure (38.6\% under
+  the unified-evaluation sampling of Table~\ref{tab:logit_lens}). The shaded
+  region is between what the model \emph{knows} and
   what it \emph{says}.}
 \label{fig:probe_gap}
 \end{figure}
@@ -302,13 +357,15 @@ Final output (layer 35) & --- & 0.386 & 35 \\
 The entity-mean logit-lens peaks at 23.4\% despite probes achieving $R^2 =
 0.997$ from the \emph{same} hidden states. At the last-token position, the
 count-probe direction has $|\cos| \leq 0.014$, even lower than entity-mean
-($0.032$). Last-token logit-lens accuracy rises from layer~22 to 41.6\% at
-layer~26---upper layers partially transfer count information toward an
-output-aligned subspace, but only to 42\%.
+($0.032$). Last-token logit-lens accuracy rises from 22.0\% at layer~22 to
+41.6\% at layer~26---upper layers partially transfer count information toward an
+output-aligned subspace, but the transfer remains far from complete.
 
 \paragraph{Subspace geometry.}
-Overall mean $|\cos| = 0.016$ between probe directions and digit rows (bootstrap
-95\% CI: $[0.015, 0.016]$), with $|\cos| \leq 0.032$ at every layer. A
+Across all layers of Qwen3-8B, the mean $|\cos| = 0.016$ between each layer's
+count-probe direction (the ridge-probe weight vector fit at that layer) and the
+digit-row directions of \texttt{lm\_head} (bootstrap 95\% CI: $[0.015, 0.016]$),
+with per-layer means $\leq 0.032$. A
 random-direction baseline gives $0.013 \pm 0.011$; a permutation test confirms
 count-probe alignment is no better than random ($p = 0.79$). TOST equivalence
 testing confirms statistical equivalence. This holds across four probe types
@@ -324,7 +381,10 @@ Once orthogonal, $\partial\mathcal{L}/\partial(W_\ell[t]\cdot\mathbf{c})
 \approx 0$: orthogonality is a stable fixed point of training dynamics.
 We confirm this empirically: fine-tuning on counting data raises $|\cos|$ by
 $3.2\times$ (0.0074 $\to$ 0.0280), while arithmetic fine-tuning does not move
-it (0.0087 $\to$ 0.0096).
+it (0.0087 $\to$ 0.0096). The two runs start from slightly different alignments
+(0.0074 vs.\ 0.0087) because they are separate fine-tunes from different
+checkpoints; the informative contrast is the relative change within each run,
+which separates cleanly ($3.2\times$ vs.\ $1.1\times$).
 
 \paragraph{Vocabulary competition.}
 Digit tokens have below-average row norms (12th--29th percentile). Sampling
@@ -351,6 +411,17 @@ reading from the probe direction at layer~2 and writing to output logits.
 The logit-lens analysis identifies a specific geometric bottleneck. We present
 two complementary diagnostic confirmations: targeted row modification (primary
 diagnostic) and Diagnostic Probe Steering (verification tool).
+
+\paragraph{What makes this a ``bottleneck'' rather than mere misalignment?}
+We use \emph{bottleneck} as an operational, causal criterion, not a loose
+metaphor: (i)~the misaligned component is \emph{necessary and sufficient} for
+the failure --- repairing only the digit rows restores high accuracy under
+constrained decoding, while shuffled-row and random-position controls do not
+(\S\ref{sec:necessity_sufficiency}); and (ii)~the information is demonstrably
+present upstream (probe $R^2 > 0.99$), so the failure is confined to the
+readout stage. Mere misalignment would not predict that a repair confined to
+nine rows of the output head causally restores behavior; the locality of the
+repair is what earns the term.
 
 \paragraph{Primary diagnostic: 9-row repair.}
 We fine-tune only the 9 digit rows of \texttt{lm\_head} (36,864 parameters) on
@@ -446,7 +517,9 @@ rises from $16.2\%$ to $67.4\%$ (rank $32{,}265 \to 16$), and addition
 logit-lens from $24.7\%$ to $98.9\%$ (rank $21{,}186 \to 1$). The improvement
 magnitude tracks task difficulty: harder tasks see a larger rank reduction,
 confirming that LoRA Q/V corrects the same geometric bottleneck across tasks.
-A locus ablation confirms Q/V yields the best logit-lens alignment of any
+A locus ablation --- applying the same rank-16 LoRA separately to attention
+Q/K/V/O projections, MLPs, and combinations, then comparing logit-lens
+alignment --- confirms Q/V yields the best logit-lens alignment of any
 single-projection variant; per-seed generation accuracy on entity counting
 alone reaches $97.0\%$, $96.5\%$, $94.5\%$ (3 seeds), showing the multi-task
 variance ($71.5$--$89.0\%$) is a task-mix artifact, not a reliability issue.
@@ -454,8 +527,12 @@ variance ($71.5$--$89.0\%$) is a task-mix artifact, not a reliability issue.
 \paragraph{Cross-model and cross-task validation.}
 All four models exhibit the same pattern: probes decode counts at $R^2 > 0.99$
 from directions orthogonal to the output head ($|\cos| \leq 0.032$). The 9-row
-repair generalizes: Mistral-7B achieves 92.0\% held-out; Pythia-410M achieves
-31.4\% held-out. At 14B, $|\cos|$ sharpens to $0.011$ ($0.57\times$ random
+repair generalizes across model families where the geometric signature is
+present: Mistral-7B achieves 92.0\% held-out. Pythia-410M reaches only
+31.4\%, so the repair's transferability at small scale is limited even though
+the orthogonality signature itself appears; we therefore scope the repair
+claim to mid-size and larger models. At 14B, $|\cos|$ sharpens to $0.011$
+($0.57\times$ random
 baseline) yet targeted repair recovers $90.3\% \pm 1.5$\---scale strengthens
 the bottleneck but does not prevent repair.
 
@@ -474,9 +551,12 @@ The bottleneck persists in instruct mode: first-token digit accuracy is 22\%
 despite $R^2 \geq 0.9996$; 9-row repair recovers 99.9\%. On natural-language
 counting (8 entity categories $\times$ 8 templates), probe-round recovers
 96.3\% vs.\ 88.7\% baseline, confirming the bottleneck generalizes beyond
-synthetic prompts. MMLU shows no bottleneck (baseline 70.2\%; output-row
+synthetic prompts. As negative controls we evaluate two standard multi-step
+benchmarks: MMLU~\citep{hendrycks2021measuring}, a multiple-choice knowledge
+suite, and GSM8K~\citep{cobbe2021training}, grade-school math word problems.
+MMLU shows no bottleneck (baseline 70.2\%; output-row
 adaptation degrades to 55.6\%; $|\cos| = 0.31$--$0.48$ vs.\ $\leq 0.032$ for
-counting). On DROP (single-digit subset), probe-round improves from 20.0\% to
+counting). On DROP~\citep{dua2019drop} (single-digit subset), probe-round improves from 20.0\% to
 30.0\% (+10~pp), suggesting partial but incomplete readout-bottleneck structure.
 
 % =============================================================================
@@ -508,10 +588,15 @@ locus ablation confirms Q/V yields the best alignment; the generation gap of
 0.000 across all seeds confirms faithful generalization.
 
 \paragraph{Comparison with chain-of-thought.}
-Chain-of-thought (CoT) prompting achieves 89.0\% on entity counting (same
-protocol, single-seed baseline), placing it alongside LoRA Q/V (83.1\%$\pm$7.2\%)
-as an effective intervention. However, CoT and our approach address the
-bottleneck through fundamentally different mechanisms. CoT externalizes the
+Chain-of-thought (CoT) prompting also substantially improves entity counting,
+placing it alongside LoRA Q/V (83.1\%$\pm$7.2\%)
+as an effective intervention. One measurement caveat matters when comparing
+numbers across studies: CoT accuracy is sensitive to how the emitted reasoning
+is scored. Scoring the \emph{first} integer anywhere in the output credits
+intermediate counting tokens rather than the model's actual answer, inflating
+accuracy by large margins; all generation-mode numbers in this paper score the
+\emph{final} integer emitted. Mechanistically, CoT and our approach address the
+bottleneck through fundamentally different means: CoT externalizes the
 serial aggregation that the model's forward pass fails to route to the output
 head---each reasoning step re-encodes the count in a form the model can
 naturally emit. LoRA Q/V corrects the routing \emph{internally}, enabling
@@ -521,6 +606,10 @@ inference cost; LoRA Q/V requires fine-tuning but adds zero inference overhead.
 This mechanistic distinction clarifies the paper's contribution: we are not
 claiming to beat CoT on accuracy, but to explain \emph{why} CoT helps and to
 provide an alternative route to the same end via targeted weight modification.
+A full mechanistic account of CoT --- e.g., whether count-to-\texttt{lm\_head}
+alignment improves across CoT reasoning tokens, and whether filler tokens
+without explicit counting produce the same effect --- is an open question
+beyond the scope of this paper.
 
 \paragraph{Limitations and scope.}
 (1)~\emph{Generation-mode scope:} The 9-row repair is a diagnostic
@@ -618,8 +707,8 @@ protocol differences: single-seed vs.\ multi-seed with diverse templates.
 
 Full single-seed DPS reproducibility (5 seeds: $94.4\% \pm 1.6\%$; probe-round
 $95.3\% \pm 1.3\%$), sensitivity analysis ($\alpha \in \{1,5,10,20\}$,
-$\sigma \in \{0.3, 0.5, 1.0\}$), and CoT comparison (CoT baseline: 89.0\%)
-are available in the supplement.
+$\sigma \in \{0.3, 0.5, 1.0\}$), and a CoT comparison under the corrected
+final-integer scorer are available in the supplement.
 
 \subsection{Evaluation Protocol Map}
 \label{sec:protocol_map}
@@ -669,7 +758,7 @@ logit-lens argmax on correct prompts vs.\ 2.4/36 for incorrect.
 \label{sec:genmode_details}
 
 Under unconstrained autoregressive generation (greedy decode, max 8 tokens,
-first integer extracted):
+final integer extracted as the model's answer):
 
 \begin{itemize}
 \item \textbf{Probe-round (generation):} 96.0\% [94.7, 97.2] ($N{=}900$, 3

@@ -7,7 +7,7 @@ import os, random, time
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-HF_CACHE = os.environ.get("HF_CACHE", "/home/gpgabriel25/hf_cache")
+HF_CACHE = os.environ.get("HF_CACHE", os.environ.get("HF_CACHE", "./hf_cache"))
 os.environ["TRANSFORMERS_CACHE"] = HF_CACHE; os.environ["HF_HOME"] = HF_CACHE
 
 MODEL = "Qwen/Qwen3-8B"
@@ -49,17 +49,18 @@ def eval_gen(model, tok, prompts, answers, digit_ids, max_new=10):
                                  do_sample=False, pad_token_id=tok.pad_token_id or tok.eos_token_id)
             new = gen[:, inp.shape[1]:]
             for j, a in enumerate(ba):
-                # Extract first digit token from generation
+                # Score the FINAL answer: take the LAST digit token in the
+                # generation. First-digit matching is wrong for CoT prompts,
+                # where intermediate counting tokens (1, 2, 3, ...) precede
+                # the answer and inflate accuracy.
                 tokens = new[j].tolist()
-                found = False
-                for tid in tokens:
+                pred = None
+                for tid in reversed(tokens):
                     if tid in digit_ids:
-                        if tid == digit_ids[int(a)-1]: correct += 1
-                        found = True
+                        pred = digit_ids.index(tid) + 1
                         break
-                if not found and len(tokens) > 0:
-                    # Check if first token is the digit
-                    if int(tokens[0]) == digit_ids[int(a)-1]: correct += 1
+                if pred is not None and pred == int(a):
+                    correct += 1
     return correct / len(prompts)
 
 def main():

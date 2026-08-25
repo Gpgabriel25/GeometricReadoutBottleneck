@@ -87,8 +87,8 @@ def build_pipeline_figure(output_pdf: Path, output_png: Path) -> None:
 
     left_boxes = [
         Box(1.3, 7.25, 4.1, 0.86, "Residual Stream", "#D9E7D9", "#6FA35E"),
-        Box(0.95, 5.85, 4.8, 1.0, "Probe decodes count\n(R^2 ~ 1.0)", "#D4DFEF", "#678CC0"),
-        Box(1.05, 4.05, 4.6, 1.05, "lm_head misaligned\n(|cos| <= 0.032)", "#F1D2D2", "#B44E4E"),
+        Box(0.95, 5.85, 4.8, 1.0, "Probe decodes count\n($R^2 \\approx 1.0$)", "#D4DFEF", "#678CC0"),
+        Box(1.05, 4.05, 4.6, 1.05, "lm-head misaligned\n($|\\cos| \\leq 0.032$)", "#F1D2D2", "#B44E4E"),
         Box(1.30, 2.45, 4.1, 0.92, "Wrong digit", "#F6E2C7", "#D89200"),
     ]
 

@@ -27,7 +27,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ========== Configuration ==========
 MODEL_NAME = "Qwen/Qwen3-8B"
-HF_CACHE = os.environ.get("HF_CACHE", "/home/gpgabriel25/hf_cache")
+HF_CACHE = os.environ.get("HF_CACHE", os.environ.get("HF_CACHE", "./hf_cache"))
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 N_TEST = 200
 SEEDS = [42, 11, 77]

@@ -1,0 +1,134 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{razeghi2022impact,stolfo2023mechanistic}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{1}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Core claims.}{1}{section*.1}\protected@file@percent }
+\citation{razeghi2022impact}
+\citation{stolfo2023mechanistic}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The geometric readout bottleneck pipeline. Probes decode counts at $R^2{\approx }1.0$, but the count-encoding direction is orthogonal to \texttt  {lm\_head} digit rows ($|\cos |{\leq }0.032$). Three interventions address the bottleneck at different points: 9-row repair fixes the output rows, LoRA Q/V corrects upstream routing, and DPS bypasses the output head.}}{2}{figure.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:pipeline}{{1}{2}{The geometric readout bottleneck pipeline. Probes decode counts at $R^2{\approx }1.0$, but the count-encoding direction is orthogonal to \texttt {lm\_head} digit rows ($|\cos |{\leq }0.032$). Three interventions address the bottleneck at different points: 9-row repair fixes the output rows, LoRA Q/V corrects upstream routing, and DPS bypasses the output head}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Motivation.}{2}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scope and contributions.}{2}{section*.4}\protected@file@percent }
+\citation{alain2016understanding,hewitt2019designing}
+\citation{nostalgebraist2020logitlens,belrose2023eliciting}
+\citation{park2023linear}
+\citation{geva2021transformer}
+\citation{turner2023activation,zou2023representation}
+\citation{meng2022locating}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background and Related Work}{3}{section.2}\protected@file@percent }
+\newlabel{sec:background}{{2}{3}{Background and Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Counting failures.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mechanistic interpretability.}{3}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Activation steering.}{3}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{3}{section.3}\protected@file@percent }
+\newlabel{sec:method}{{3}{3}{Method}{section.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Synthetic benchmark.}{3}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Tasks.}{3}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Models.}{3}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Evaluation modes and metrics.}{3}{section*.11}\protected@file@percent }
+\citation{nostalgebraist2020logitlens}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \textbf  {Unified evaluation:} all methods under three standard protocols on Qwen3-8B entity counting. Columns share prompts, seeds, and scoring; ``next-token'' scores the argmax at the answer position (digit-restricted or full-vocabulary), ``generation'' scores full greedy decoding by the final emitted integer.}}{4}{table.caption.13}\protected@file@percent }
+\newlabel{tab:unified_evaluation}{{1}{4}{\textbf {Unified evaluation:} all methods under three standard protocols on Qwen3-8B entity counting. Columns share prompts, seeds, and scoring; ``next-token'' scores the argmax at the answer position (digit-restricted or full-vocabulary), ``generation'' scores full greedy decoding by the final emitted integer}{table.caption.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Per-layer probe $R^2$ on Qwen3-8B (ridge regression at the entity-mean position). ``All'' = full test set; ``easy'' = the easy difficulty stratum (count $\leq 3$, no distractors, passage length $\leq 10$ sentences).}}{4}{table.caption.14}\protected@file@percent }
+\newlabel{tab:probe_r2}{{2}{4}{Per-layer probe $R^2$ on Qwen3-8B (ridge regression at the entity-mean position). ``All'' = full test set; ``easy'' = the easy difficulty stratum (count $\leq 3$, no distractors, passage length $\leq 10$ sentences)}{table.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results: The Representation--Output Gap}{4}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{4}{Results: The Representation--Output Gap}{section.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{How to read the numbers.}{4}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Probes Read Counts from Residual Streams}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Logit-Lens Analysis: Explaining the Gap}{4}{section.5}\protected@file@percent }
+\newlabel{sec:logit_lens}{{5}{4}{Logit-Lens Analysis: Explaining the Gap}{section.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Representation--output gap: per-layer probe $R^2$ (blue) remains above 0.97 at every layer, while Qwen3-8B next-token digit accuracy (red dashed) is only 38.8\% under the stratified sampling used for this figure (38.6\% under the unified-evaluation sampling of Table~\ref {tab:unified_evaluation}). The shaded region is between what the model \emph  {knows} and what it \emph  {says}.}}{5}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:probe_gap}{{2}{5}{Representation--output gap: per-layer probe $R^2$ (blue) remains above 0.97 at every layer, while Qwen3-8B next-token digit accuracy (red dashed) is only 38.8\% under the stratified sampling used for this figure (38.6\% under the unified-evaluation sampling of Table~\ref {tab:unified_evaluation}). The shaded region is between what the model \emph {knows} and what it \emph {says}}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Logit-lens analysis. (a)~Accuracy: fraction where \texttt  {lm\_head} projects the correct count from entity-mean (red) vs.\ last-token (blue) hidden states. Probe $R^2 \approx 0.99$ (green dotted) shown for reference. (b)~Mean probability of correct number token (log scale).}}{5}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:logit_lens}{{3}{5}{Logit-lens analysis. (a)~Accuracy: fraction where \texttt {lm\_head} projects the correct count from entity-mean (red) vs.\ last-token (blue) hidden states. Probe $R^2 \approx 0.99$ (green dotted) shown for reference. (b)~Mean probability of correct number token (log scale)}{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {paragraph}{Subspace geometry.}{5}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why is orthogonality there?}{5}{section*.19}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Logit-lens peak accuracy vs.\ probe $R^2$ from the same positions.}}{6}{table.caption.17}\protected@file@percent }
+\newlabel{tab:logit_lens}{{3}{6}{Logit-lens peak accuracy vs.\ probe $R^2$ from the same positions}{table.caption.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces \textbf  {Mode-matched primary results} on Qwen3-8B (4 tasks, 3 seeds $\times $ 200 test prompts each). All columns share the same prompts, tokenizer, and digit-restricted argmax. Probe-round is the readout upper bound. Fullvocab repair uses full-vocabulary argmax (152K tokens).}}{6}{table.caption.24}\protected@file@percent }
+\newlabel{tab:mode_matched_extval}{{4}{6}{\textbf {Mode-matched primary results} on Qwen3-8B (4 tasks, 3 seeds $\times $ 200 test prompts each). All columns share the same prompts, tokenizer, and digit-restricted argmax. Probe-round is the readout upper bound. Fullvocab repair uses full-vocabulary argmax (152K tokens)}{table.caption.24}{}}
+\@writefile{toc}{\contentsline {paragraph}{Vocabulary competition.}{6}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Encoding--projection pipeline.}{6}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Diagnostic Verification and Targeted Intervention}{6}{section.6}\protected@file@percent }
+\newlabel{sec:dps}{{6}{6}{Diagnostic Verification and Targeted Intervention}{section.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{What makes this a ``bottleneck'' rather than mere misalignment?}{6}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Primary diagnostic: 9-row repair.}{6}{section*.23}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces \textbf  {Intervention comparison} across models and protocols. $^\dagger $Hard DPS under primary multi-seed protocol. $^\ddagger $LoRA Q/V uses fullvocab argmax, $N{=}200$, seeds $\{42, 11, 77\}$. See Appendix for full protocol details.}}{7}{table.caption.25}\protected@file@percent }
+\newlabel{tab:intervention_comparison}{{5}{7}{\textbf {Intervention comparison} across models and protocols. $^\dagger $Hard DPS under primary multi-seed protocol. $^\ddagger $LoRA Q/V uses fullvocab argmax, $N{=}200$, seeds $\{42, 11, 77\}$. See Appendix for full protocol details}{table.caption.25}{}}
+\@writefile{toc}{\contentsline {paragraph}{Geometric verification.}{7}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Generation-mode evidence.}{7}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mechanism of LoRA Q/V.}{7}{section*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cross-model and cross-task validation.}{7}{section*.29}\protected@file@percent }
+\citation{hendrycks2021measuring}
+\citation{cobbe2021training}
+\citation{dua2019drop}
+\citation{elhage2022superposition}
+\@writefile{toc}{\contentsline {paragraph}{Instruct mode and natural language.}{8}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{8}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{8}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{The output gap: localized and diagnosed.}{8}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why LoRA Q/V, not output-head repair?}{8}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Comparison with chain-of-thought.}{8}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations and scope.}{9}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Diversity-Controlled Analysis of the Entity-Counting Repair Ceiling}{9}{section.8}\protected@file@percent }
+\newlabel{sec:diversity}{{8}{9}{Diversity-Controlled Analysis of the Entity-Counting Repair Ceiling}{section.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Diversity sweep ($N{=}240$ train / $N{=}160$ test per level, held-out prompts, digit-restricted argmax). Moving from a single-entity single-template distribution to the original diverse distribution costs the in-domain repair 16.8 percentage points; a D0-trained repair loses roughly half its accuracy out of domain.}}{9}{table.caption.35}\protected@file@percent }
+\newlabel{tab:diversity}{{6}{9}{Diversity sweep ($N{=}240$ train / $N{=}160$ test per level, held-out prompts, digit-restricted argmax). Moving from a single-entity single-template distribution to the original diverse distribution costs the in-domain repair 16.8 percentage points; a D0-trained repair loses roughly half its accuracy out of domain}{table.caption.35}{}}
+\@writefile{toc}{\contentsline {paragraph}{Broader implications.}{9}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{9}{section.9}\protected@file@percent }
+\bibstyle{iclr2027_conference}
+\bibdata{references}
+\bibcite{alain2016understanding}{{1}{2016}{{Alain \& Bengio}}{{Alain and Bengio}}}
+\bibcite{belrose2023eliciting}{{2}{2023}{{Belrose et~al.}}{{Belrose, Furman, Smith, Halawi, Ostrovsky, McKinney, Biderman, and Steinhardt}}}
+\bibcite{cobbe2021training}{{3}{2021}{{Cobbe et~al.}}{{Cobbe, Kosaraju, Bavarian, Chen, Jun, Kaiser, Plappert, Tworek, Hilton, Nakano, Hesse, and Schulman}}}
+\bibcite{dua2019drop}{{4}{2019}{{Dua et~al.}}{{Dua, Wang, Dasigi, Stanovsky, Singh, and Gardner}}}
+\bibcite{elhage2022superposition}{{5}{2022}{{Elhage et~al.}}{{Elhage, Hume, Olsson, Schiefer, Henighan, Kravec, Hatfield-Dodds, Lasenby, Drain, Chen, et~al.}}}
+\bibcite{geva2021transformer}{{6}{2021}{{Geva et~al.}}{{Geva, Schuster, Berant, and Levy}}}
+\bibcite{hendrycks2021measuring}{{7}{2021}{{Hendrycks et~al.}}{{Hendrycks, Burns, Basart, Zou, Mazeika, Song, and Steinhardt}}}
+\bibcite{hewitt2019designing}{{8}{2019}{{Hewitt \& Liang}}{{Hewitt and Liang}}}
+\bibcite{meng2022locating}{{9}{2022}{{Meng et~al.}}{{Meng, Bau, Andonian, and Belinkov}}}
+\bibcite{nostalgebraist2020logitlens}{{10}{2020}{{nostalgebraist}}{{}}}
+\bibcite{park2023linear}{{11}{2023}{{Park et~al.}}{{}}}
+\bibcite{razeghi2022impact}{{12}{2022}{{Razeghi et~al.}}{{Razeghi, Logan~IV, Gardner, and Singh}}}
+\bibcite{stolfo2023mechanistic}{{13}{2023}{{Stolfo et~al.}}{{Stolfo, Belinkov, and Sachan}}}
+\bibcite{turner2023activation}{{14}{2023}{{Turner et~al.}}{{Turner, Thiergart, Udell, Leech, Mini, and Berglund}}}
+\bibcite{zou2023representation}{{15}{2023}{{Zou et~al.}}{{Zou, Phan, Chen, Campbell, Guo, Ren, Pan, Yin, Mazeika, Dombrowski, et~al.}}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Full Diagnostic Verification Appendix}{11}{appendix.A}\protected@file@percent }
+\newlabel{sec:appendix_dps}{{A}{11}{Full Diagnostic Verification Appendix}{appendix.A}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Initial Diagnostic DPS Protocol (Single-Seed)}{11}{subsection.A.1}\protected@file@percent }
+\newlabel{sec:dps_initial}{{A.1}{11}{Initial Diagnostic DPS Protocol (Single-Seed)}{subsection.A.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces DPS single-seed results (seed 42), $N{=}300$, next-token evaluation.}}{11}{table.caption.39}\protected@file@percent }
+\newlabel{tab:dps}{{7}{11}{DPS single-seed results (seed 42), $N{=}300$, next-token evaluation}{table.caption.39}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Evaluation Protocol Map}{11}{subsection.A.2}\protected@file@percent }
+\newlabel{sec:protocol_map}{{A.2}{11}{Evaluation Protocol Map}{subsection.A.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Evaluation protocols used in this paper.}}{11}{table.caption.40}\protected@file@percent }
+\newlabel{tab:protocol_map}{{8}{11}{Evaluation protocols used in this paper}{table.caption.40}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Robustness Checks}{12}{subsection.A.3}\protected@file@percent }
+\newlabel{sec:robustness_checks}{{A.3}{12}{Robustness Checks}{subsection.A.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Depth Profile and Difficulty Breakdown}{12}{subsection.A.4}\protected@file@percent }
+\newlabel{sec:depth_difficulty}{{A.4}{12}{Depth Profile and Difficulty Breakdown}{subsection.A.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Generation-Mode Protocol Details}{12}{subsection.A.5}\protected@file@percent }
+\newlabel{sec:genmode_details}{{A.5}{12}{Generation-Mode Protocol Details}{subsection.A.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.6}Necessity and Sufficiency Controls}{12}{subsection.A.6}\protected@file@percent }
+\newlabel{sec:necessity_sufficiency}{{A.6}{12}{Necessity and Sufficiency Controls}{subsection.A.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.7}Logit-Gap Ceiling Model}{12}{subsection.A.7}\protected@file@percent }
+\newlabel{sec:logit_gap_ceiling}{{A.7}{12}{Logit-Gap Ceiling Model}{subsection.A.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.8}Format Robustness Check}{12}{subsection.A.8}\protected@file@percent }
+\newlabel{sec:format_robustness}{{A.8}{12}{Format Robustness Check}{subsection.A.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.9}Multi-Digit Extension: Counts 10--20}{12}{subsection.A.9}\protected@file@percent }
+\newlabel{sec:multidigit}{{A.9}{12}{Multi-Digit Extension: Counts 10--20}{subsection.A.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Entity counting accuracy stratified by count value ($N{=}600$, 3 seeds).}}{13}{table.caption.41}\protected@file@percent }
+\newlabel{tab:entity_count_stratified}{{9}{13}{Entity counting accuracy stratified by count value ($N{=}600$, 3 seeds)}{table.caption.41}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.10}Max Extraction: A Non-Count Aggregation Task}{13}{subsection.A.10}\protected@file@percent }
+\newlabel{sec:max_extraction}{{A.10}{13}{Max Extraction: A Non-Count Aggregation Task}{subsection.A.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.11}Majority Vote: Same Bottleneck, Different Surface Task}{13}{subsection.A.11}\protected@file@percent }
+\newlabel{sec:majority_vote}{{A.11}{13}{Majority Vote: Same Bottleneck, Different Surface Task}{subsection.A.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.12}Capacity Ablation for Entity Counting}{13}{subsection.A.12}\protected@file@percent }
+\newlabel{sec:capacity_ablation}{{A.12}{13}{Capacity Ablation for Entity Counting}{subsection.A.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.13}Generation-Mode Mismatch Diagnosis}{13}{subsection.A.13}\protected@file@percent }
+\newlabel{sec:genmode_mismatch}{{A.13}{13}{Generation-Mode Mismatch Diagnosis}{subsection.A.13}{}}
+\gdef \@abspage@last{13}

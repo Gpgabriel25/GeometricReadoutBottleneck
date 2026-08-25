@@ -1,0 +1,59 @@
+{
+ "provenance": {
+  "model": "Qwen/Qwen3-8B",
+  "device": "cpu",
+  "seed": 42,
+  "n_train_per_level": 240,
+  "n_test_per_level": 160,
+  "repair": "9-row margin 2.0 vs full-vocab competitor, Adam lr=0.05, iters=400",
+  "hidden": "last-position post-final-norm, bf16 model, float32 numpy",
+  "started_utc": "2026-08-24T17:59:11Z"
+ },
+ "in_domain": {
+  "D0_minimal": {
+   "baseline_digit_restricted": 0.0625,
+   "repair_digit_restricted": 0.7063,
+   "repair_fullvocab": 0.1125,
+   "probe_r2": -2.5916
+  },
+  "D1_low": {
+   "baseline_digit_restricted": 0.0812,
+   "repair_digit_restricted": 0.5188,
+   "repair_fullvocab": 0.1187,
+   "probe_r2": -1.9355
+  },
+  "D2_medium": {
+   "baseline_digit_restricted": 0.0562,
+   "repair_digit_restricted": 0.45,
+   "repair_fullvocab": 0.1,
+   "probe_r2": -2.5662
+  },
+  "D3_original": {
+   "baseline_digit_restricted": 0.0938,
+   "repair_digit_restricted": 0.5375,
+   "repair_fullvocab": 0.1562,
+   "probe_r2": -2.6188
+  }
+ },
+ "probe_r2": {
+  "D0_minimal": -2.5916,
+  "D1_low": -1.9355,
+  "D2_medium": -2.5662,
+  "D3_original": -2.6188
+ },
+ "cross_level": {
+  "D0_to_D0_minimal": 0.7063,
+  "D0_to_D1_low": 0.3875,
+  "D0_to_D2_medium": 0.3375,
+  "D0_to_D3_original": 0.425
+ },
+ "summary": {
+  "diversity_gradient_repair": {
+   "D0_minimal": 0.7063,
+   "D1_low": 0.5188,
+   "D2_medium": 0.45,
+   "D3_original": 0.5375
+  },
+  "interpretation_hint": "monotonic decline with diversity supports H2 intra-class diversity; flat profile supports H1 norm competition"
+ }
+}

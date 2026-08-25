@@ -1,0 +1,113 @@
+\begin{thebibliography}{15}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Alain and Bengio(2016)]{alain2016understanding}
+Guillaume Alain and Yoshua Bengio.
+\newblock Understanding intermediate layers using linear classifier probes.
+\newblock In \emph{ICLR 2017 Workshop}, 2016.
+
+\bibitem[Belrose et~al.(2023)Belrose, Furman, Smith, Halawi, Ostrovsky,
+  McKinney, Biderman, and Steinhardt]{belrose2023eliciting}
+Nora Belrose, Zach Furman, Logan Smith, Danny Halawi, Igor Ostrovsky, Lev
+  McKinney, Stella Biderman, and Jacob Steinhardt.
+\newblock Eliciting latent predictions from transformers with the tuned lens.
+\newblock \emph{arXiv preprint arXiv:2303.08112}, 2023.
+
+\bibitem[Cobbe et~al.(2021)Cobbe, Kosaraju, Bavarian, Chen, Jun, Kaiser,
+  Plappert, Tworek, Hilton, Nakano, Hesse, and Schulman]{cobbe2021training}
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz
+  Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano,
+  Christopher Hesse, and John Schulman.
+\newblock Training verifiers to solve math word problems.
+\newblock \emph{arXiv preprint arXiv:2110.14168}, 2021.
+
+\bibitem[Dua et~al.(2019)Dua, Wang, Dasigi, Stanovsky, Singh, and
+  Gardner]{dua2019drop}
+Dheeru Dua, Yizhong Wang, Pradeep Dasigi, Gabriel Stanovsky, Sameer Singh, and
+  Matt Gardner.
+\newblock {DROP}: A reading comprehension benchmark requiring discrete
+  reasoning over paragraphs.
+\newblock In \emph{Proceedings of NAACL-HLT}, 2019.
+
+\bibitem[Elhage et~al.(2022)Elhage, Hume, Olsson, Schiefer, Henighan, Kravec,
+  Hatfield-Dodds, Lasenby, Drain, Chen, et~al.]{elhage2022superposition}
+Nelson Elhage, Tristan Hume, Catherine Olsson, Nicholas Schiefer, Tom Henighan,
+  Shauna Kravec, Zac Hatfield-Dodds, Robert Lasenby, Dawn Drain, Carol Chen,
+  et~al.
+\newblock Toy models of superposition.
+\newblock \emph{Transformer Circuits Thread}, 2022.
+\newblock Available at
+  \url{https://transformer-circuits.pub/2022/toy_model/index.html}.
+
+\bibitem[Geva et~al.(2021)Geva, Schuster, Berant, and
+  Levy]{geva2021transformer}
+Mor Geva, Roei Schuster, Jonathan Berant, and Omer Levy.
+\newblock Transformer feed-forward layers are key-value memories.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 5484--5495, 2021.
+
+\bibitem[Hendrycks et~al.(2021)Hendrycks, Burns, Basart, Zou, Mazeika, Song,
+  and Steinhardt]{hendrycks2021measuring}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn
+  Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+
+\bibitem[Hewitt and Liang(2019)]{hewitt2019designing}
+John Hewitt and Percy Liang.
+\newblock Designing and interpreting probes with control tasks.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2733--2743, 2019.
+
+\bibitem[Meng et~al.(2022)Meng, Bau, Andonian, and Belinkov]{meng2022locating}
+Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov.
+\newblock Locating and editing factual associations in {GPT}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~35, pages 17359--17372, 2022.
+
+\bibitem[nostalgebraist(2020)]{nostalgebraist2020logitlens}
+nostalgebraist.
+\newblock interpreting {GPT}: the logit lens.
+\newblock LessWrong post,
+  \url{https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens},
+  2020.
+
+\bibitem[Park et~al.(2023)]{park2023linear}
+Chang Park et~al.
+\newblock The linear representation hypothesis and the geometry of large
+  language models.
+\newblock \emph{arXiv preprint arXiv:2311.03658}, 2023.
+
+\bibitem[Razeghi et~al.(2022)Razeghi, Logan~IV, Gardner, and
+  Singh]{razeghi2022impact}
+Yasaman Razeghi, Robert~L Logan~IV, Matt Gardner, and Sameer Singh.
+\newblock Impact of pretraining term frequencies on few-shot numerical
+  reasoning.
+\newblock \emph{arXiv preprint arXiv:2202.07206}, 2022.
+
+\bibitem[Stolfo et~al.(2023)Stolfo, Belinkov, and
+  Sachan]{stolfo2023mechanistic}
+Alessandro Stolfo, Yonatan Belinkov, and Mrinmaya Sachan.
+\newblock A mechanistic interpretation of arithmetic reasoning in language
+  models using causal mediation analysis.
+\newblock \emph{arXiv preprint arXiv:2305.15054}, 2023.
+
+\bibitem[Turner et~al.(2023)Turner, Thiergart, Udell, Leech, Mini, and
+  Berglund]{turner2023activation}
+Alexander~Matt Turner, Lisa Thiergart, David Udell, Gavin Leech, Ulisse Mini,
+  and Lukas Berglund.
+\newblock Activation addition: Steering language models without optimization.
+\newblock \emph{arXiv preprint arXiv:2308.10248}, 2023.
+
+\bibitem[Zou et~al.(2023)Zou, Phan, Chen, Campbell, Guo, Ren, Pan, Yin,
+  Mazeika, Dombrowski, et~al.]{zou2023representation}
+Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren,
+  Alexander Pan, Xuwang Yin, Mantas Mazeika, Ann-Kathrin Dombrowski, et~al.
+\newblock Representation engineering: A top-down approach to {AI} transparency.
+\newblock \emph{arXiv preprint arXiv:2310.01405}, 2023.
+
+\end{thebibliography}

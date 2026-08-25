@@ -25,7 +25,7 @@ import torch.nn as nn
 from torch.optim import AdamW
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-HF_CACHE = os.environ.get("HF_CACHE", "/home/gpgabriel25/hf_cache")
+HF_CACHE = os.environ.get("HF_CACHE", os.environ.get("HF_CACHE", "./hf_cache"))
 os.environ["TRANSFORMERS_CACHE"] = HF_CACHE
 os.environ["HF_HOME"] = HF_CACHE
 
